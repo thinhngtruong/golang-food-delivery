@@ -45,7 +45,7 @@ func runService(db *gorm.DB) error {
 	{
 		restaurants.POST("", ginrestaurant.CreateRestaurant(appCtx))
 		//restaurants.GET("/:id", ginrestaurant.GetRestaurant(appCtx))
-		//restaurants.GET("", ginrestaurant.ListRestaurant(appCtx))
+		restaurants.GET("", ginrestaurant.ListRestaurant(appCtx))
 		//restaurants.PATCH("/:id", ginrestaurant.UpdateRestaurant(appCtx))
 		//restaurants.DELETE("/:id", ginrestaurant.DeleteRestaurant(appCtx))
 	}
@@ -72,22 +72,3 @@ func runService(db *gorm.DB) error {
 //	KEY `city_id` (`city_id`) USING BTREE,
 //	KEY `status` (`status`) USING BTREE
 //) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-type Restaurant struct {
-	Id   int    `json:"id" gorm:"column:id;"`
-	Name string `json:"name" gorm:"column:name;"`
-	Addr string `json:"address" gorm:"column:addr;"`
-}
-
-func (Restaurant) TableName() string {
-	return "restaurants"
-}
-
-type RestaurantUpdate struct {
-	Name *string `json:"name" gorm:"column:name;"`
-	Addr *string `json:"address" gorm:"column:addr;"`
-}
-
-func (RestaurantUpdate) TableName() string {
-	return Restaurant{}.TableName()
-}
