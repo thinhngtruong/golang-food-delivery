@@ -7,7 +7,7 @@ import (
 )
 
 type ListRestaurantStore interface {
-	ListDataByCondition(ctx context.Context,
+	GetDataByCondition(ctx context.Context,
 		conditions map[string]interface{},
 		filter *restaurantmodel.Filter,
 		paging *common.Paging,
@@ -27,7 +27,7 @@ func (biz *listRestaurantBiz) ListRestaurant(ctx context.Context,
 	filter *restaurantmodel.Filter,
 	paging *common.Paging) ([]restaurantmodel.Restaurant, error) {
 
-	result, err := biz.store.ListDataByCondition(ctx, nil, filter, paging)
+	result, err := biz.store.GetDataByCondition(ctx, nil, filter, paging)
 
 	return result, err
 }
