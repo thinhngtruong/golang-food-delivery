@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	//"learn-api/common"
+	"learn-api/common"
 	"learn-api/component"
 )
 
@@ -12,14 +12,14 @@ func Recover(ac component.AppContext) gin.HandlerFunc {
 			if err := recover(); err != nil {
 				c.Header("Content-Type", "application/json")
 
-				//if appErr, ok := err.(*common.AppError); ok {
-				//	c.AbortWithStatusJSON(appErr.StatusCode, appErr)
-				//	panic(err)
-				//	return
-				//}
-				//
-				//appErr := common.ErrInternal(err.(error))
-				//c.AbortWithStatusJSON(appErr.StatusCode, appErr)
+				if appErr, ok := err.(*common.AppError); ok {
+					c.AbortWithStatusJSON(appErr.StatusCode, appErr)
+					panic(err)
+					return
+				}
+
+				appErr := common.ErrInternal(err.(error))
+				c.AbortWithStatusJSON(appErr.StatusCode, appErr)
 				panic(err)
 				return
 			}
