@@ -29,15 +29,15 @@ func (biz *deleteRestaurantBiz) SoftDeleteRestaurant(ctx context.Context, id int
 	oldData, err := biz.store.FindDataByCondition(ctx, map[string]interface{}{"id": id})
 
 	if err != nil {
-		//return common.ErrCannotGetEntity(restaurantmodel.EntityName, err)
+		//return common.ErrCannotGetEntity(model.EntityName, err)
 	}
 
 	if oldData.Status == 0 {
-		//return common.ErrEntityDeleted(restaurantmodel.EntityName, nil)
+		//return common.ErrEntityDeleted(model.EntityName, nil)
 	}
 
 	if err := biz.store.SoftDeleteData(ctx, id); err != nil {
-		//return common.ErrCannotUpdateEntity(restaurantmodel.EntityName, err)
+		//return common.ErrCannotUpdateEntity(model.EntityName, err)
 	}
 
 	return nil

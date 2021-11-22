@@ -30,15 +30,15 @@ func (biz *updateRestaurantBiz) UpdateRestaurant(ctx context.Context, id int, da
 	oldData, err := biz.store.FindDataByCondition(ctx, map[string]interface{}{"id": id})
 
 	if err != nil {
-		//return common.ErrCannotGetEntity(restaurantmodel.EntityName, err)
+		//return common.ErrCannotGetEntity(model.EntityName, err)
 	}
 
 	if oldData.Status == 0 {
-		//return common.ErrEntityDeleted(restaurantmodel.EntityName, nil)
+		//return common.ErrEntityDeleted(model.EntityName, nil)
 	}
 
 	if err := biz.store.UpdateData(ctx, id, data); err != nil {
-		//return common.ErrCannotUpdateEntity(restaurantmodel.EntityName, err)
+		//return common.ErrCannotUpdateEntity(model.EntityName, err)
 	}
 
 	return nil
